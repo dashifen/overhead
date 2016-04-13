@@ -31,12 +31,14 @@ The following options may be passed as an object to the `$.overhead()` function.
 If you need to know when the body's classes are changed, you can do the following:
 
     (function($) {
+	
         $.overhead();
         
         $("body").on("overhead-pinned", function() { .... })
             .on("overhead-unpinned", function() { .... })
             .on("overhead-down", function() { .... })
             .on("overhead-up", function() { .... });
+			
     })(jQurey);
     
 Or some subset of these observations.  Note:  the names of the events that are triggered exactly match the classes that are added to the body tag.  If you alter the default class names, you'll also have to be sure to observe your custom names and not the defaults.
