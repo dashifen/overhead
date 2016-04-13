@@ -4,7 +4,7 @@
     var throttle = function(callback, limit) {
         if (typeof(callback) !== "function") return;
 
-        // source: https://jsfiddle.net/jonathansampson/m7G64/ (accessed: 2016-04-13)
+        // source: http://sampsonblog.com/749/simple-throttle-function (accessed: 2016-04-13)
 
         var wait = false;
         return function() {
@@ -52,8 +52,6 @@
             options.throttle = 150;
         }
 
-        console.log(options);
-
         var toggler = function(force_start_dir) {
 
             // the toggler function determines (a) if we've scrolled past the options.offset
@@ -68,10 +66,10 @@
 
             // now that we've discovered the appropriate pin class, we want to add it to the
             // body tag.  but, we also need to be sure that the other pin class is not on it.
-            // that's why we've identified by the class to add and the class to remove.  now,
-            // we'll do that:
+            // that's why we've identified by the class to add and the class to remove.  and,
+            // we also trigger a custom event that matches the class we added.
 
-            body.removeClass(pin_class_rem).addClass(pin_class_add);
+            body.removeClass(pin_class_rem).addClass(pin_class_add).trigger(pin_class_add);
 
             if (options.directions === true) {
                 var direction = options.classes[options.start_dir];
@@ -88,8 +86,12 @@
                     direction = previously_scrolled < scrolled ? options.classes.down : options.classes.up;
                 }
 
+                // like before, we've discovered the class to add so we need to know which one to
+                // remove.  once we identify that, we can change the body's classes and trigger
+                // another custom event.
+
                 var direction_rem = direction == options.classes.down ? options.classes.up : options.classes.down;
-                body.removeClass(direction_rem).addClass(direction);
+                body.removeClass(direction_rem).addClass(direction).trigger(direction);
             }
 
             // finally, so that we can identify our direction next time, we save the distance

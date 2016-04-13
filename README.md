@@ -26,6 +26,21 @@ The following options may be passed as an object to the `$.overhead()` function.
  - **start_dir:** if `directions` is true, this determines which class is added to the body tag when the page loads.  Must be either `up` or `down`; anything else is ignored.
  - **classes:** this object determines the class names added to the body tag.  One or more of them can be changed.  Any classes beyond those specified in the default object above are ignored.
 
+##Custom Events
+
+If you need to know when the body's classes are changed, you can do the following:
+
+    (function($) {
+        $.overhead();
+        
+        $("body").on("overhead-pinned", function() { .... })
+            .on("overhead-unpinned", function() { .... })
+            .on("overhead-down", function() { .... })
+            .on("overhead-up", function() { .... });
+    })(jQurey);
+    
+Or some subset of these observations.  Note:  the names of the events that are triggered exactly match the classes that are added to the body tag.  If you alter the default class names, you'll also have to be sure to observe your custom names and not the defaults.
+
 ##Examples
 
 To use overhead such that the offset is the height of the body's header element:
@@ -62,4 +77,5 @@ To use overhead with an offset and alternate directional classes:
 
 ###Changelog:
 
- 1. 2016-04-13: Initial release
+ 1. 2016-04-13: Initial release.
+ 2. 2016-04-13: Added custom events. 
